@@ -1,15 +1,19 @@
 package Controller.LogIn;
 
+import Controller.DB.DBConnection;
 import Controller.Sesion.Sesion;
+import Model.Employee;
 import Model.Employees;
 import View.LogIn.LogIn;
 import View.LogIn.LogInError;
 
+import java.sql.ResultSet;
+import java.sql.SQLException;
+
 public class CoLogIn {
 
-    Employees employees;
     public CoLogIn() {
-        this.employees = new Employees();
+        
         LogIn logIn = new LogIn();
 
         addListeners(logIn);
@@ -18,7 +22,12 @@ public class CoLogIn {
     private void addListeners(LogIn w) {
 
         w.getIniciarSesiónButton().addActionListener(e -> {
-            checkLogIn(w);
+            try {
+                checkLogIn(w);
+            } catch (SQLException | ClassNotFoundException ex) {
+                throwError(w,ex.getMessage());
+                throw new RuntimeException(ex);
+            }
         });
 
         w.getPasswordField1().addKeyListener(new EventKeyPressed(this,w));
@@ -27,34 +36,24 @@ public class CoLogIn {
 
     }
 
-    public void checkLogIn(LogIn w) {
-        if (w.getPasswordField1().getPassword().length > 0 || !w.getTextField1().getText().isEmpty()){
+    public void checkLogIn(LogIn w) throws SQLException, ClassNotFoundException {
+        if (w.getPasswordField1().getPassword().length > 0 || !w.getTextField1().getText().isEmpty()) {
             String user = w.getTextField1().getText();
             String pass = String.valueOf(w.getPasswordField1().getPassword());
 
-            boolean check = false;
-            int index = 0;
+            ResultSet rs = new DBConnection().doQuery("SELECT * FROM employees WHERE user LIKE '" + user + "' AND password LIKE '" + pass + "'");
 
-            for (int i = 0; i < employees.getEmployees().size() ; i++) {
-                if (employees.getEmployees(i).getUser().equals(user) && employees.getEmployees(i).getPass().equals(pass)){
-                    check = true;
-                    index = i;
-                }
-            }
-            if(check){
-                System.out.println("encontrado");
+            if (rs.next()) {
                 w.dispose();
-                new Sesion(employees.getEmployees(index));
-            } else{
-                System.out.println("No existe");
-                throwError(w,"Usuario o contraseña incorrecta");
+                new Sesion(new Employee(rs.getInt("ID"), rs.getString("user"), rs.getString("name"), rs.getString("surname"), rs.getFloat("discount")));
+            } else {
+                throwError(w, "Usuario o contraseña incorrecta.");
+
             }
-        } else {
-            throwError(w,"Formulario en blanco");
         }
     }
 
-    private void throwError(LogIn w ,String s) {
+    public void throwError(LogIn w ,String s) {
         w.clearForm();
         LogInError error = new LogInError(s);
     }

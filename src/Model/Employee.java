@@ -32,6 +32,14 @@ public class Employee {
         this.discount = discount;
     }
 
+    public Employee(int id, String user, String name, String surname, float discount) {
+        this.id = id;
+        this.user = user;
+        this.name = name;
+        this.surname = surname;
+        this.discount = discount;
+    }
+
     public int getId() {
         return id;
     }
