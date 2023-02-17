@@ -32,7 +32,8 @@ public class MainWindow extends JFrame{
     private void setConfig() {
 
         setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
-        setSize(Toolkit.getDefaultToolkit().getScreenSize());
+        setSize((int) ((int) Toolkit.getDefaultToolkit().getScreenSize().getWidth() * 0.8), (int) ((int) Toolkit.getDefaultToolkit().getScreenSize().getHeight() * 0.8));
+        setExtendedState(JFrame.MAXIMIZED_BOTH);
         setVisible(true);
 
     }

@@ -37,7 +37,7 @@ public class CoLogIn {
     }
 
     public void checkLogIn(LogIn w) throws SQLException, ClassNotFoundException {
-        if (w.getPasswordField1().getPassword().length > 0 || !w.getTextField1().getText().isEmpty()) {
+        if (w.getPasswordField1().getPassword().length > 0 && !w.getTextField1().getText().isEmpty()) {
             String user = w.getTextField1().getText();
             String pass = String.valueOf(w.getPasswordField1().getPassword());
 

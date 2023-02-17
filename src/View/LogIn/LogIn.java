@@ -1,6 +1,12 @@
 package View.LogIn;
 
 import javax.swing.*;
+import javax.swing.text.Element;
+import java.io.File;
+import java.io.IOException;
+import javax.swing.text.html.*;
+import java.net.MalformedURLException;
+import java.net.URL;
 
 public class LogIn extends JFrame{
     private JTextField textField1;
@@ -10,9 +16,9 @@ public class LogIn extends JFrame{
 
     public LogIn(){
 
-        add(mainPanel);
+       add(mainPanel);
 
-        setConfig();
+       setConfig();
 
     }
 
