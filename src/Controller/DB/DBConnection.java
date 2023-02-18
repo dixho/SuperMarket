@@ -7,9 +7,9 @@ import java.sql.*;
 
 public class DBConnection {
 
-    String url;
-    String username;
-    String password;
+    private String url;
+    private String username;
+    private String password;
 
     public DBConnection(){
 

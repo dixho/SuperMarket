@@ -1,7 +1,7 @@
 package Controller.LogIn;
 
 import Controller.DB.DBConnection;
-import Controller.Sesion.Sesion;
+import Controller.Sesion.SesionController;
 import Model.Employee;
 import Model.Employees;
 import View.LogIn.LogIn;
@@ -45,7 +45,7 @@ public class CoLogIn {
 
             if (rs.next()) {
                 w.dispose();
-                new Sesion(new Employee(rs.getInt("ID"), rs.getString("user"), rs.getString("name"), rs.getString("surname"), rs.getFloat("discount")));
+                new SesionController(new Employee(rs.getInt("ID"), rs.getString("user"), rs.getString("name"), rs.getString("surname"), rs.getFloat("discount")));
             } else {
                 throwError(w, "Usuario o contraseña incorrecta.");
 

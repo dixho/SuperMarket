@@ -8,8 +8,8 @@ import java.sql.SQLException;
 
 public class EventKeyPressed implements KeyListener {
 
-    CoLogIn coLogIn;
-    LogIn w;
+    private CoLogIn coLogIn;
+    private LogIn w;
     public EventKeyPressed(CoLogIn coLogIn, LogIn w){
         this.coLogIn = coLogIn;
         this.w = w;
