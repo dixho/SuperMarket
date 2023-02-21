@@ -1,22 +1,24 @@
 package Controller.Sesion;
 
 import Model.Employee;
-import View.Sesion.MainWindow;
+import Model.SesionData;
+import View.Sesion.ViMainWindow;
 
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
-public class SesionController {
+public class CoSesion {
     private Employee employee;
-    public SesionController(Employee employee) {
+    public CoSesion(Employee employee) {
         this.employee = employee;
-        MainWindow w = new MainWindow(this.employee);
+        SesionData sesionData = new SesionData(employee);
+        ViMainWindow w = new ViMainWindow(sesionData);
 
-         addListeners(w);
+         addListeners(w,sesionData);
 
     }
 
-    private void addListeners(MainWindow w) {
+    private void addListeners(ViMainWindow w, SesionData sesionData) {
 
         w.getStartButton().addKeyListener(new KeyListener() {
             @Override
@@ -27,7 +29,7 @@ public class SesionController {
             @Override
             public void keyPressed(KeyEvent e) {
                 if (e.getKeyCode() == KeyEvent.VK_ENTER){
-                    startTPV(w);
+                    startTPV(w,sesionData);
                 } else if (e.getKeyCode() == KeyEvent.VK_DOWN) {
                     w.getExitButton().grabFocus();
                 }
@@ -41,7 +43,7 @@ public class SesionController {
         });
 
         w.getStartButton().addActionListener(e -> {
-            startTPV(w);
+            startTPV(w, sesionData);
         });
 
         w.getExitButton().addKeyListener(new KeyListener() {
@@ -71,8 +73,8 @@ public class SesionController {
 
     }
 
-    private void startTPV(MainWindow w) {
+    private void startTPV(ViMainWindow w, SesionData sesionData) {
         w.dispose();
-        TPVController tpvController = new TPVController(employee);
+        CoTPV tpvController = new CoTPV(sesionData);
     }
 }

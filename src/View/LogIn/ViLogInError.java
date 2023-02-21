@@ -4,12 +4,12 @@ import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class LogInError extends JDialog {
+public class ViLogInError extends JDialog {
     private JPanel contentPane;
     private JButton buttonOK;
     private JLabel ErrorMessage;
 
-    public LogInError(String s) {
+    public ViLogInError(String s) {
 
         setContentPane(contentPane);
         setModal(true);
@@ -33,7 +33,7 @@ public class LogInError extends JDialog {
     }
 
     public static void main(String[] args) {
-        LogInError dialog = new LogInError("");
+        ViLogInError dialog = new ViLogInError("");
         dialog.pack();
         dialog.setVisible(true);
         System.exit(0);

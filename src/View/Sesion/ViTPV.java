@@ -1,7 +1,13 @@
 package View.Sesion;
 
+import Controller.Sesion.EventProductClick;
+import Controller.Sesion.EventCategoryClick;
+import Model.Category;
+import Model.SesionData;
+
 import javax.swing.*;
 import java.awt.*;
+import java.util.ArrayList;
 
 public class ViTPV extends JFrame{
     private JPanel mainPanel;
@@ -18,27 +24,71 @@ public class ViTPV extends JFrame{
     private JButton a0Button;
     private JButton commaButton;
     private JPanel productsPanel;
-    private JButton button7;
-    private JButton button9;
-    private JButton button10;
-    private JButton button11;
-    private JButton button12;
     private JPanel categoryPanel;
     private JPanel productPanel;
     private JPanel cashierPanel;
+    private JPanel ticketPanel;
+    private JScrollPane ticketScrollPane;
 
-    public ViTPV(){
+    private SesionData sesionData;
+
+    public ViTPV(ArrayList<Category> categories, SesionData sesionData){
+        this.sesionData = sesionData;
 
         add(mainPanel);
+
+        setProducts(categories);
         setConfig();
 
+    }
+
+    public void setCategories(ArrayList<Category> categories) {
+
+
+        for (int i = 0; i < categories.size() ; i++) {
+            JButton add = new JButton(categories.get(i).getName());
+            add.addActionListener(new EventCategoryClick(this,categories));
+            getCategoryPanel().add(add);
+        }
+
+        refresh();
+    }
+
+    public void setProducts(Category category){
+
+        if (productPanel.getComponentCount() > 0){
+
+            productPanel.removeAll();
+            refresh();
+        }
+
+        if(sesionData.getActualCategory() == null || category != sesionData.getActualCategory()){
+            sesionData.setActualCategory(category);
+            for (int i = 0; i < category.getProducts().size(); i++) {
+                JButton add = new JButton(category.getProducts(i).getName());
+                add.addActionListener(new EventProductClick(this));
+                productPanel.add(add);
+            }
+        }
+
+
+
+
+    }
+
+    public void setProducts(ArrayList<Category> categories){
+        for (int i = 0; i < categories.size() ; i++) {
+            for (int j = 0; j < categories.get(i).getProducts().size() ; j++) {
+                productPanel.add(new JButton(categories.get(i).getProducts(j).getName()));
+            }
+        }
     }
 
     private void setConfig() {
 
         setDefaultCloseOperation(EXIT_ON_CLOSE);  // Falta crear metodo para cerrar sesión
         setExtendedState(JFrame.MAXIMIZED_BOTH);
-        setResizable(false);
+        //setResizable(false);
         setSize(Toolkit.getDefaultToolkit().getScreenSize());
         setLocationRelativeTo(null);
         setVisible(true);
@@ -84,5 +134,21 @@ public class ViTPV extends JFrame{
 
     public void setCashierPanel(JPanel cashierPanel) {
         this.cashierPanel = cashierPanel;
+    }
+
+    public JPanel getProductsPanel() {
+        return productsPanel;
+    }
+
+    public void setProductsPanel(JPanel productsPanel) {
+        this.productsPanel = productsPanel;
+    }
+
+    public JPanel getTicketPanel() {
+        return ticketPanel;
+    }
+
+    public void setTicketPanel(JPanel ticketPanel) {
+        this.ticketPanel = ticketPanel;
     }
 }

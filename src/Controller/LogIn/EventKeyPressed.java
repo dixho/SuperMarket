@@ -1,6 +1,6 @@
 package Controller.LogIn;
 
-import View.LogIn.LogIn;
+import View.LogIn.ViLogIn;
 
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
@@ -9,8 +9,8 @@ import java.sql.SQLException;
 public class EventKeyPressed implements KeyListener {
 
     private CoLogIn coLogIn;
-    private LogIn w;
-    public EventKeyPressed(CoLogIn coLogIn, LogIn w){
+    private ViLogIn w;
+    public EventKeyPressed(CoLogIn coLogIn, ViLogIn w){
         this.coLogIn = coLogIn;
         this.w = w;
     }

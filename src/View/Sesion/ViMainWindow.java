@@ -1,11 +1,12 @@
 package View.Sesion;
 
 import Model.Employee;
+import Model.SesionData;
 
 import javax.swing.*;
 import java.awt.*;
 
-public class MainWindow extends JFrame{
+public class ViMainWindow extends JFrame{
     private JPanel mainPanel;
     private JLabel nameLabel;
     private JLabel surnameLabel;
@@ -13,9 +14,9 @@ public class MainWindow extends JFrame{
     private JButton startButton;
     private JButton exitButton;
     
-    public MainWindow(Employee employee){
+    public ViMainWindow(SesionData sesionData){
         
-        setName(employee);
+        setName(sesionData.getEmployee());
         add(mainPanel);
         setConfig();
     }

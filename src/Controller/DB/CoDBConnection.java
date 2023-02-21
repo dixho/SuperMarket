@@ -1,17 +1,14 @@
 package Controller.DB;
 
-import Model.Employee;
-
-import javax.swing.plaf.nimbus.State;
 import java.sql.*;
 
-public class DBConnection {
+public class CoDBConnection {
 
     private String url;
     private String username;
     private String password;
 
-    public DBConnection(){
+    public CoDBConnection(){
 
         this.url = "jdbc:mysql://localhost:3306/dixho_market";
         this.username = "root";

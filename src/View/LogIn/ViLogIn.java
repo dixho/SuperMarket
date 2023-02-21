@@ -1,20 +1,14 @@
 package View.LogIn;
 
 import javax.swing.*;
-import javax.swing.text.Element;
-import java.io.File;
-import java.io.IOException;
-import javax.swing.text.html.*;
-import java.net.MalformedURLException;
-import java.net.URL;
 
-public class LogIn extends JFrame{
+public class ViLogIn extends JFrame{
     private JTextField textField1;
     private JPasswordField passwordField1;
     private JButton iniciarSesiónButton;
     private JPanel mainPanel;
 
-    public LogIn(){
+    public ViLogIn(){
 
        add(mainPanel);
 
@@ -46,11 +40,11 @@ public class LogIn extends JFrame{
         this.passwordField1 = passwordField1;
     }
 
-    public JButton getIniciarSesiónButton() {
+    public JButton getIniciarSesionButton() {
         return iniciarSesiónButton;
     }
 
-    public void setIniciarSesiónButton(JButton iniciarSesiónButton) {
+    public void setIniciarSesionButton(JButton iniciarSesiónButton) {
         this.iniciarSesiónButton = iniciarSesiónButton;
     }
 
